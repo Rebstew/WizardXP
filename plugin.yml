@@ -1,0 +1,19 @@
+name: WizardXP
+main: fr.iwebster.wizardxp.WizardXP
+version: 0.0.1
+permissions:
+    # wizardxp.*:
+        # description: Gives access to create as much potion as needed
+        # children:
+            # wizardxp.single:true
+            # wizardxp.stack:true
+            # wizardxp.all:true
+    wizardxp.single:
+        description: Allows to create one bottle with a stick
+        default: not op
+    wizardxp.stack:
+        description: Allows to create a stack of bottles with a redstone torch
+        default: not op
+    wizardxp.all:
+        description: Allows to create as much bottles as possible
+        default: not op
