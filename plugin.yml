@@ -1,19 +1,25 @@
 name: WizardXP
 main: fr.iwebster.wizardxp.WizardXP
-version: 0.0.1
+version: 1.0.1
 permissions:
-    # wizardxp.*:
-        # description: Gives access to create as much potion as needed
-        # children:
-            # wizardxp.single:true
-            # wizardxp.stack:true
-            # wizardxp.all:true
+    wizardxp.*:
+        description: Gives access to create as much potion as needed
+        children:
+            wizardxp.single: true
+            wizardxp.stack: true
+            wizardxp.fill: true
     wizardxp.single:
         description: Allows to create one bottle with a stick
         default: not op
     wizardxp.stack:
         description: Allows to create a stack of bottles with a redstone torch
         default: not op
-    wizardxp.all:
+    wizardxp.fill:
         description: Allows to create as much bottles as possible
         default: not op
+commands:
+   wizardxp:
+      description: Tells the sender about the usage of the plugin.
+      usage: /wizardxp <page>
+      permission: wizardxp.help
+      permission-message: Only wizards can read the scrawl of XP conveying !
