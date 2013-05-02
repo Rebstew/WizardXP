@@ -1,13 +1,14 @@
 name: WizardXP
 main: fr.iwebster.wizardxp.WizardXP
-version: 1.0.1
+version: 1.0.2
 permissions:
     wizardxp.*:
-        description: Gives access to create as much potion as needed
+        description: Gives access to create as much potion as needed, plus the scrawl of help
         children:
             wizardxp.single: true
             wizardxp.stack: true
             wizardxp.fill: true
+            wizardxp.help: true
     wizardxp.single:
         description: Allows to create one bottle with a stick
         default: not op
@@ -16,6 +17,9 @@ permissions:
         default: not op
     wizardxp.fill:
         description: Allows to create as much bottles as possible
+        default: not op
+    wizardxp.help:
+        description: Tells the sender about the usage of the plugin.
         default: not op
 commands:
    wizardxp:
