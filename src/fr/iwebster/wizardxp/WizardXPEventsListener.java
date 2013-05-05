@@ -21,7 +21,6 @@ public class WizardXPEventsListener implements Listener {
         if(e.getPlayer().getGameMode()!=GameMode.CREATIVE && e.getAction()==Action.LEFT_CLICK_BLOCK && e.getClickedBlock().getTypeId()==116)
         {
             handler.PlayerInteractEventHandler(e);
-            e.setCancelled(true);
         }
     }
 }
