@@ -2,6 +2,8 @@ package fr.iwebster.wizardxp;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.FileConfiguration;
+
 import java.util.ListIterator;
 
 import org.bukkit.ChatColor;
@@ -13,12 +15,15 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class WizardXP extends JavaPlugin {
 
-	public static int EXP_COST = 11;
+	public static int EXP_COST;
+	private FileConfiguration config;
 
 	public void onEnable() {
 		WizardXPEventsHandler handler = new WizardXPEventsHandler(this);
 		getServer().getPluginManager().registerEvents(
-				new WizardXPEventsListener(handler), this);
+				new WizardXPEventsListener(handler, this), this);
+		config = this.getConfig();
+		EXP_COST=config.getInt("data.expcost");
 	}
 
 	/**
@@ -29,18 +34,33 @@ public final class WizardXP extends JavaPlugin {
 	public void addBottles(Player p, int n) {
 		// if the player has enough xp points and enough empty bottles in his
 		// inventory
+		int playersXp;
+		int playersLvl = p.getLevel();
+		
+		//player have had following xp to reach that level
+		if(playersLvl>=0 && playersLvl<=16){
+			playersXp = playersLvl*17;
+		} else if(playersLvl>=17 && playersLvl<=31){
+			playersXp = (int) (1.5*Math.pow(playersLvl, 2)-29.5*playersLvl+360);
+		} else playersXp = (int) (3.5*Math.pow(playersLvl, 2)-151.5*playersLvl+2220);
+		
+		//player had following xp in his bar
+		if(playersLvl >=30){
+			playersXp += (62 + (playersLvl - 30) * 7)*p.getExp();
+		}else if(playersLvl >=15){
+			playersXp += (17 + (playersLvl - 15) * 3)*p.getExp(); 
+		} else playersXp += 17*p.getExp();
+		
 		if (n > 0) {
-			if (p.getTotalExperience() >= EXP_COST * n) {
+			if (playersXp >= EXP_COST * n) {
 				if (p.getInventory().contains(374, n)) {
-
-					// player gets n BOE in exchange of n empty bottles and 11*n
-					// xp
-					int playersXp = p.getTotalExperience();
+					
+					//player made n bottles, so he now has following xp
 					playersXp -= EXP_COST * n;
 
+					
 					// resetting xp points, bar, levels & shit
 					p.setLevel(0);
-					p.setTotalExperience(0);
 					p.setExp(0);
 
 					// gives player the xp he still has

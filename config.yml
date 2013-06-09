@@ -1,0 +1,14 @@
+#
+# WizardXP config file
+# References IDs required for the actions in the plugin
+#
+# Below values must be integers !
+#
+blocks:
+   interact: 116
+items:
+    single: 280
+    stack: 76
+    fill: 369
+data:
+    expcost: 11

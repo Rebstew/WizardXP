@@ -1,6 +1,6 @@
 name: WizardXP
 main: fr.iwebster.wizardxp.WizardXP
-version: 1.0.3
+version: 1.0.4
 permissions:
     wizardxp.*:
         description: Gives access to create as much potion as needed, plus the scrawl of help
